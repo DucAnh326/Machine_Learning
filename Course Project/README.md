@@ -34,7 +34,7 @@
 ### 2.3. Lấy mẫu phân tầng giảm kích thước dữ liệu (Stratified Down-scaling)
 * **Thực trạng:** Tập dữ liệu gốc chứa hơn $252.000$ bản ghi, gây nghẽn tài nguyên tính toán đối với thuật toán CART viết chay khi quét ngưỡng phân chia.
 * **Giải pháp:** Áp dụng kỹ thuật lấy mẫu phân tầng theo tỷ lệ ngày (`visit_date`):
-  $$\text{sampling\_fraction} = \frac{10.000}{N_{\text{total}}} \approx 3.96\%$$
+  $$f_{\text{sample}} = \frac{10.000}{N_{\text{total}}} \approx 3.96\%$$
 * **Ưu điểm:** Duy trì đầy đủ sự hiện diện của toàn bộ $478$ ngày trong dòng thời gian, bảo toàn tỷ lệ số lượng nhà hàng hoạt động giữa các ngày lễ/cao điểm và ngày thường.
 
 ### 2.4. Phân chia Train / Test theo trục thời gian (Temporal Split)
