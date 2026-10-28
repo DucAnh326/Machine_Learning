@@ -61,7 +61,7 @@
 
 ## 4. TRIỂN KHAI VÀ ĐỐI CHIẾU 4 MÔ HÌNH
 
-### 4.1. Linear Regression (Code Chay - OLS Ridge)
+### 4.1. Linear Regression (Tự cài đặt - OLS Ridge)
 * Sử dụng phương trình pháp tuyến (Normal Equation) có thành phần điều chuẩn $L_2$ ($\lambda = 0.1$):
   $$w = (X^T X + \lambda I^*)^{-1} X^T y$$
 * Trong đó, ma trận đơn vị $I^*$ được triệt tiêu giá trị tại vị trí bias $(0, 0)$ nhằm không áp đặt phạt lên hệ số chặn $w_0$.
@@ -71,7 +71,7 @@
 * Kết hợp đồng thời hàm phạt $L_1$ (Lasso) và $L_2$ (Ridge).
 * Sử dụng kiểm định chéo $5$-fold tích hợp sẵn để tự động tinh chỉnh cặp siêu tham số tối ưu (`alpha` và `l1_ratio`).
 
-### 4.3. CART Regression Tree (Code Chay)
+### 4.3. CART Regression Tree (Tự cài đặt)
 * Xây dựng cấu trúc cây nhị phân đệ quy dựa trên độ giảm tổng bình phương sai số (Variance / SSE Reduction).
 * Giá trị tại mỗi nút lá là trung bình cộng số học của các mẫu rơi vào lá đó.
 * Điều kiện dừng (Stopping criteria): Cố định độ sâu `max_depth = 6` và ngưỡng số mẫu tối thiểu để chia nhánh `min_samples_split = 30`.
