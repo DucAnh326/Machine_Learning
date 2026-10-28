@@ -90,7 +90,6 @@
    * Nghịch đảo giá trị dự đoán về thang đo gốc: $\hat{y} = \exp(\hat{z}) - 1$.
    * Kẹp chặn giá trị không âm: $\hat{y} = \max(0, \hat{y})$.
    * Tính toán sai số trung bình tuyệt đối (MAE) và căn bậc hai sai số bình phương trung bình (RMSE).
-3. **Loại bỏ hệ số xác định $R^2$:** Bản chất hàm giải mũ $\exp$ dễ phóng đại sai số phần dư của một vài điểm dự đoán chệch nhẹ trong không gian log thành chênh lệch lớn trên thang đo thực, khiến tổng bình phương phần dư vượt tổng bình phương toàn phần ($SS_{\text{res}} > SS_{\text{tot}}$) làm $R^2$ bị âm vô lý dù mô hình bám sát xu hướng chung rất tốt.
 
 ### 5.2. Kết quả thực nghiệm tiêu biểu (trên mô hình CART)
 * **RMSLE:** $\approx 0.7908$ (mức baseline tốt đối với cây đơn lẻ không dùng đặc trưng độ trễ lag).
