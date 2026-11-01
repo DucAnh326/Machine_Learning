@@ -34,7 +34,7 @@
 ### 2.3. Lấy mẫu phân tầng giảm kích thước dữ liệu (Stratified Down-scaling)
 * **Thực trạng:** Tập dữ liệu gốc chứa hơn $252.000$ bản ghi, gây nghẽn tài nguyên tính toán đối với thuật toán CART viết chay khi quét ngưỡng phân chia.
 * **Giải pháp:** Áp dụng kỹ thuật lấy mẫu phân tầng theo tỷ lệ ngày (`visit_date`):
-  $$\text{sampling\_fraction} = \frac{10.000}{N_{\text{total}}} \approx 3.96\%$$
+  $$f_{\text{sample}} = \frac{10.000}{N_{\text{total}}} \approx 3.96\%$$
 * **Ưu điểm:** Duy trì đầy đủ sự hiện diện của toàn bộ $478$ ngày trong dòng thời gian, bảo toàn tỷ lệ số lượng nhà hàng hoạt động giữa các ngày lễ/cao điểm và ngày thường.
 
 ### 2.4. Phân chia Train / Test theo trục thời gian (Temporal Split)
@@ -61,7 +61,7 @@
 
 ## 4. TRIỂN KHAI VÀ ĐỐI CHIẾU 4 MÔ HÌNH
 
-### 4.1. Linear Regression (Code Chay - OLS Ridge)
+### 4.1. Linear Regression (Tự cài đặt - OLS Ridge)
 * Sử dụng phương trình pháp tuyến (Normal Equation) có thành phần điều chuẩn $L_2$ ($\lambda = 0.1$):
   $$w = (X^T X + \lambda I^*)^{-1} X^T y$$
 * Trong đó, ma trận đơn vị $I^*$ được triệt tiêu giá trị tại vị trí bias $(0, 0)$ nhằm không áp đặt phạt lên hệ số chặn $w_0$.
@@ -71,7 +71,7 @@
 * Kết hợp đồng thời hàm phạt $L_1$ (Lasso) và $L_2$ (Ridge).
 * Sử dụng kiểm định chéo $5$-fold tích hợp sẵn để tự động tinh chỉnh cặp siêu tham số tối ưu (`alpha` và `l1_ratio`).
 
-### 4.3. CART Regression Tree (Code Chay)
+### 4.3. CART Regression Tree (Tự cài đặt)
 * Xây dựng cấu trúc cây nhị phân đệ quy dựa trên độ giảm tổng bình phương sai số (Variance / SSE Reduction).
 * Giá trị tại mỗi nút lá là trung bình cộng số học của các mẫu rơi vào lá đó.
 * Điều kiện dừng (Stopping criteria): Cố định độ sâu `max_depth = 6` và ngưỡng số mẫu tối thiểu để chia nhánh `min_samples_split = 30`.
@@ -90,7 +90,6 @@
    * Nghịch đảo giá trị dự đoán về thang đo gốc: $\hat{y} = \exp(\hat{z}) - 1$.
    * Kẹp chặn giá trị không âm: $\hat{y} = \max(0, \hat{y})$.
    * Tính toán sai số trung bình tuyệt đối (MAE) và căn bậc hai sai số bình phương trung bình (RMSE).
-3. **Loại bỏ hệ số xác định $R^2$:** Bản chất hàm giải mũ $\exp$ dễ phóng đại sai số phần dư của một vài điểm dự đoán chệch nhẹ trong không gian log thành chênh lệch lớn trên thang đo thực, khiến tổng bình phương phần dư vượt tổng bình phương toàn phần ($SS_{\text{res}} > SS_{\text{tot}}$) làm $R^2$ bị âm vô lý dù mô hình bám sát xu hướng chung rất tốt.
 
 ### 5.2. Kết quả thực nghiệm tiêu biểu (trên mô hình CART)
 * **RMSLE:** $\approx 0.7908$ (mức baseline tốt đối với cây đơn lẻ không dùng đặc trưng độ trễ lag).
